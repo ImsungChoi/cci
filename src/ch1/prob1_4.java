@@ -16,18 +16,15 @@ public class prob1_4 {
 
     public static String convertEmpty(String str, int length) {
         char[] chars = str.toCharArray();
+        StringBuffer sb = new StringBuffer();
 
-        char[] ret = new char[str.length() * 3];
-        int index = 0;
         for(int i = 0; i < length; i++) {
             if(chars[i] == ' ') {
-                ret[index++] = '%';
-                ret[index++] = '2';
-                ret[index++] = '0';
+                sb.append("%20");
             } else {
-                ret[index++] = chars[i];
+                sb.append(chars[i]);
             }
         }
-        return new String(ret);
+        return sb.toString();
     }
 }
