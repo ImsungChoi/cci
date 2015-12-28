@@ -20,21 +20,21 @@ public class Node {
         n.next = end;
     }
 
-    Node deleteNode(Node head, int d) {
+    static void deleteNode(Node head, int d) {
         Node n = head;
 
         if (n.data == d) {
-            return head.next;
+            head = head.next;
+            return;
         }
 
         while (n.next !=  null) {
             if (n.next.data == d) {
                 n.next = n.next.next;
-                return head;
+                return;
             }
             n = n.next;
         }
-        return head;
     }
 
     static void printAllNodes(Node head) {
