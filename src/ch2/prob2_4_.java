@@ -18,7 +18,7 @@ public class prob2_4_ {
     }
 
     /**
-     * 2개의 Linked List에 데이터를 옮기는 솔션
+     * 2개의 Linked List에 데이터를 옮기는 솔루션
      *
      * @param node
      * @param k
