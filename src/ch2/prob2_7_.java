@@ -25,24 +25,30 @@ public class prob2_7_ {
      * @return
      */
     public static boolean isPalindrome(Node head) {
-        Node node = head;
-        Stack<Node> stack = new Stack<Node>();
-
-        while (node != null) {
-            stack.push(node);
-            node = node.next;
+        if (head == null) {
+            return false;
         }
-        int pop = stack.size();
-        pop += (pop % 2 == 1)? 1 : 0;
-        pop /= 2;
-        while (pop-- > 0) {
-            node = stack.pop();
+
+        Node fast = head;
+        Node slow = head;
+        Stack<Node> stack = new Stack<>();
+
+        while(fast != null && fast.next != null) {
+            stack.push(slow);
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        if(fast != null) {
+            slow = slow.next;
         }
 
         while(stack.isEmpty() != false) {
-            if (stack.pop() != node) {
+            Node node = stack.pop();
+            if(node != slow) {
                 return false;
             }
+            slow = slow.next;
         }
 
         return true;

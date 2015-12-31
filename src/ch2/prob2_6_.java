@@ -1,6 +1,6 @@
 package ch2;
 
-import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -20,6 +20,7 @@ public class prob2_6_ {
         d.next = b;
 
         System.out.println(findFirstNodeInCircleLinkedList(a).data);
+        System.out.println(findLoopStartWithTwoPointer(a).data);
     }
 
     /**
@@ -29,7 +30,7 @@ public class prob2_6_ {
      * @return
      */
     public static Node findFirstNodeInCircleLinkedList(Node head) {
-        Queue<Node> queue = new ArrayDeque<>();
+        Queue<Node> queue = new LinkedList<>();
 
         Node node = head;
         while(node.next != null) {
@@ -38,12 +39,48 @@ public class prob2_6_ {
                 if (temp == node.next) {
                     return temp;
                 }
-                queue.add(temp);
+                queue.offer(temp);
             }
-            queue.add(node);
+            queue.offer(node);
             node = node.next;
         }
 
         return null;
+    }
+
+    /**
+     * 1번과 2번 전진하는 2개의 포인터를 활용
+     *
+     * @param head
+     * @return
+     */
+    public static Node findLoopStartWithTwoPointer(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node twoMover = head;
+        Node oneMover = head;
+
+        while (true) {
+            if(oneMover.next == null || twoMover.next == null || twoMover.next.next == null) {
+                return null;
+            }
+
+            oneMover = oneMover.next;
+            twoMover = twoMover.next.next;
+
+            if (oneMover == twoMover) {
+                break;
+            }
+        }
+
+        oneMover = head;
+        while (oneMover != twoMover) {
+            oneMover = oneMover.next;
+            twoMover = twoMover.next;
+        }
+
+        return oneMover;
     }
 }
