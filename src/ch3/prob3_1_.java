@@ -7,7 +7,7 @@ import sun.reflect.annotation.ExceptionProxy;
  *
  * 하나의 배열로 3개의 스택을 구현
  */
-public class prob3_1 {
+public class prob3_1_ {
     public static void main(String[] args) {
         StackArray stack = new StackArray();
         for(int i = 0; i < 3; i++) {
@@ -78,3 +78,4 @@ class StackArray{
         return (pointer[stackNum] < stackNum * (size / 3));
     }
 }
+
