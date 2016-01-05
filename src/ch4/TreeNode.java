@@ -8,6 +8,7 @@ public class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
+    Color color;
 
     public TreeNode() {
 
@@ -15,12 +16,14 @@ public class TreeNode {
 
     public TreeNode(int val) {
         this.val = val;
+        this.color = Color.white;
     }
 
     public TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;
+        this.color = Color.white;
     }
 
     public static void inOrderTraversal(TreeNode node) {
@@ -33,22 +36,5 @@ public class TreeNode {
         if (node.right != null) {
             inOrderTraversal(node.right);
         }
-=======
- * Created by imsungchoi on 2016. 1. 4..
- */
-public class TreeNode {
-    TreeNode left;
-    TreeNode right;
-    int value;
-
-    public TreeNode(int value) {
-        this.value = value;
-    }
-
-    public TreeNode(TreeNode left, TreeNode right, int value){
-        this.left = left;
-        this.right = right;
-        this.value = value;
->>>>>>> Stashed changes
     }
 }
