@@ -20,17 +20,17 @@ public class prob4_5 {
 
     public static boolean isBinarySearchTree(TreeNode root) {
         List<TreeNode> list = new ArrayList<TreeNode>();
-        getListWithInorderTravesal(list, root);
+        getListWithInorderTraversal(list, root);
         return isSortedList(list);
     }
 
-    public static List<TreeNode> getListWithInorderTravesal(List<TreeNode> list, TreeNode node) {
+    public static List<TreeNode> getListWithInorderTraversal(List<TreeNode> list, TreeNode node) {
         if (node.left != null) {
-            getListWithInorderTravesal(list, node.left);
+            getListWithInorderTraversal(list, node.left);
         }
         list.add(node);
         if (node.right != null) {
-            getListWithInorderTravesal(list, node.right);
+            getListWithInorderTraversal(list, node.right);
         }
         return list;
     }

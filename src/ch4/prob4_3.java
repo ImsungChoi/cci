@@ -42,6 +42,7 @@ public class prob4_3 {
 
     public static TreeNode addNode(TreeNode parent, int val, int direction) {
         TreeNode node = new TreeNode(val);
+        node.parent = parent;
 
         if(direction == -1) {
             parent.left = node;
