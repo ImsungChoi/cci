@@ -37,4 +37,20 @@ public class TreeNode {
             inOrderTraversal(node.right);
         }
     }
+
+    public static void inOrderTraversalIterative(TreeNode root) {
+        TreeNode node = root;
+        while (node != null) {
+            if (node.left != null && node.left.color != Color.black) {
+                node = node.left;
+            } else if (node.color != Color.black) {
+                System.out.println(node.val);
+                node.color = Color.black;
+            } else if (node.right != null && node.right.color != Color.black) {
+                node = node.right;
+            } else {
+                node = node.parent;
+            }
+        }
+    }
 }
