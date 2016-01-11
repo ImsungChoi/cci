@@ -20,10 +20,7 @@ public class prob4_3 {
     }
 
     public static TreeNode generateSubTree(TreeNode root, int[] sortedList, int start, int end, int direction) {
-        if (start >= end) {
-            if (start == end) {
-                return addNode(root, sortedList[start], direction);
-            }
+        if (start > end) {
             return null;
         }
 

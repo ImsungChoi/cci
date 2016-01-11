@@ -1,8 +1,5 @@
 package ch4;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * Created by imsungchoi on 2016. 1. 1..
  *
@@ -25,19 +22,22 @@ public class prob4_1 {
         System.out.println(isBalanced(root));
     }
 
-    public static int isBalanced(TreeNode node) {
-        if (node.left == null && node.right == null) {
-            return 1;
+    public static boolean isBalanced(TreeNode node) {
+        return (checkBalanced(node) > 0)? true : false;
+    }
+
+    public static int checkBalanced(TreeNode node) {
+        if (node == null) {
+            return 0;
         }
 
-        int left = 0;
-        int right = 0;
-        if (node.left != null) {
-            left = isBalanced(node.left);
+        int left = checkBalanced(node.left);
+        if (left < 0) {
+            return -1;
         }
-
-        if (node.right != null) {
-            right = isBalanced(node.right);
+        int right = checkBalanced(node.right);
+        if (right < 0) {
+            return -1;
         }
 
         if (Math.abs(left - right) > 1) {

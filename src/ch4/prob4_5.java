@@ -15,11 +15,26 @@ public class prob4_5 {
         }
 
         TreeNode root = prob4_3.generateBinarySearchTree(ints);
-        System.out.println(isBinarySearchTree(root));
+        System.out.println(isBinarySearchTree2(root, null, null));
+    }
+
+    public static boolean isBinarySearchTree2(TreeNode node, Integer min, Integer max) {
+        if (node == null) {
+            return true;
+        }
+
+        if (min != null && node.val < min || max != null && node.val > max) {
+            return false;
+        }
+
+        if (isBinarySearchTree2(node.left, min, node.val) || isBinarySearchTree2(node.right, node.val, max)) {
+            return false;
+        }
+        return true;
     }
 
     public static boolean isBinarySearchTree(TreeNode root) {
-        List<TreeNode> list = new ArrayList<TreeNode>();
+        List<TreeNode> list = new ArrayList<>();
         getListWithInorderTraversal(list, root);
         return isSortedList(list);
     }

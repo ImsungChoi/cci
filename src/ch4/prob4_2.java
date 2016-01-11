@@ -38,6 +38,7 @@ public class prob4_2 {
     }
 
     public static boolean isReachableUni(DirectedGraph g, DirectedVertex v1, DirectedVertex v2) {
+        g.vertices.stream().forEach(v -> v.color = Color.white);
         Queue<DirectedVertex> queue = new LinkedList<>();
         queue.offer(v1);
 

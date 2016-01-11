@@ -17,7 +17,8 @@ public class prob4_4 {
         }
 
         TreeNode root = prob4_3.generateBinarySearchTree(ints);
-        List<List<TreeNode>> lists = getListsFromTree(root);
+        List<List<TreeNode>> lists = new ArrayList<>();
+        getListsFromTree(lists, root, 0);
         for (List<TreeNode> list : lists) {
             for (TreeNode node : list) {
                 System.out.print(node.val + " ");
@@ -26,52 +27,20 @@ public class prob4_4 {
         }
     }
 
-    public static List<List<TreeNode>> getListsFromTree(TreeNode root) {
-        List<List<TreeNode>> lists = new ArrayList<>();
-        List<TreeNode> list = null;
-        Queue<TreeNode> queue = new LinkedList<>();
-        root.color = Color.black;
-        queue.offer(root);
-        Color check = Color.gray;
-
-        while(!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            //System.out.println(node.color);
-            //System.out.println(check);
-
-            if (node.color != check) {
-                list = new ArrayList<>();
-                lists.add(list);
-                check = node.color;
-            }
-
-            list.add(node);
-            setChildrenNodeColor(node, check);
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
+    public static void getListsFromTree(List<List<TreeNode>> lists, TreeNode node, int level) {
+        if (node == null) {
+            return;
         }
-
-        return lists;
-    }
-
-    public static void setChildrenNodeColor(TreeNode node, Color check) {
-        Color set = null;
-        if (check == Color.black) {
-            set = Color.gray;
+        List<TreeNode> list;
+        if (lists.size() == level) {
+            list = new ArrayList<>();
+            lists.add(list);
         } else {
-            set = Color.black;
+            list = lists.get(level);
         }
+        list.add(node);
 
-        if (node.left != null) {
-            node.left.color = set;
-        }
-
-        if (node.right != null) {
-            node.right.color = set;
-        }
+        getListsFromTree(lists, node.left, level + 1);
+        getListsFromTree(lists, node.right, level + 1);
     }
 }
