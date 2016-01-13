@@ -2,9 +2,6 @@ package problems;
 
 import java.util.*;
 
-/**
- * Created by 1002427 on 2016. 1. 11..
- */
 public class PackageManager {
 
     public static void main(String[] args) {
@@ -27,7 +24,7 @@ public class PackageManager {
         set.add(package5);
 
         Packages packageManager = new Packages(set);
-        for (Package p : packageManager.getDependencySet(package2)) {
+        for (Package p : packageManager.getDependencySet(package1)) {
             System.out.print(p.name + " ");
         }
         System.out.println();
@@ -37,8 +34,6 @@ public class PackageManager {
 
 class Packages {
     Set<Package> packages;
-    //SortedSet<Package> topologicalSet;
-    int time;
 
     public Packages() {
 
@@ -46,59 +41,32 @@ class Packages {
 
     public Packages(Set<Package> packages) {
         this.packages = packages;
-        //this.topologicalSet = new TreeSet<>();
-        getTopoligicalSet();
     }
 
-    public void getTopoligicalSet() {
-        for(Package p : packages) {
-            p.isVisited = false;
-        }
-        time = 0;
-        for(Package p : packages) {
-            if (p.isVisited == false) {
-                dfsVigit(p);
-            }
-        }
-    }
-
-    public void dfsVigit(Package p) {
+    public void dfsVigit(List<Package> packages, Package p) {
         p.isVisited = true;
 
         for(Package dependent : p.dependency) {
             if(dependent.isVisited == false) {
-                dfsVigit(dependent);
+                dfsVigit(packages, dependent);
             }
         }
-        time++;
-        p.order = time;
-        //topologicalSet.add(p);
+        packages.add(p);
     }
 
-    public Set<Package> getDependencySet (Package p) {
-        for (Package pack : packages) {
-            pack.isVisited = false;
+    public List<Package> getDependencySet (Package p) {
+        for (Package pck : packages) {
+            pck.isVisited = false;
         }
-        SortedSet<Package> dependencySet = new TreeSet<>();
-        Queue<Package> queue = new LinkedList<>();
-        queue.add(p);
-        while (!queue.isEmpty()) {
-            Package dequeued = queue.poll();
-            dependencySet.add(dequeued);
-            for(Package adj : dequeued.dependency) {
-                if (adj.isVisited == false) {
-                    adj.isVisited = true;
-                    queue.add(adj);
-                }
-            }
-        }
-        return dependencySet;
+
+        List<Package> ret = new ArrayList<>();
+        dfsVigit(ret, p);
+        return ret;
     }
 }
 
-class Package implements Comparable<Package> {
+class Package {
     String name;
-    int order;
     boolean isVisited;
     Set<Package> dependency;
 
@@ -109,11 +77,6 @@ class Package implements Comparable<Package> {
     public Package(String name) {
         this.name = name;
         this.dependency = new HashSet<>();
-        this.order = 0;
         this.isVisited = false;
-    }
-
-    public int compareTo(Package p) {
-        return this.order - p.order;
     }
 }
