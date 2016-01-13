@@ -8,45 +8,29 @@ import java.util.List;
  */
 public class prob9_5 {
     public static void main(String[] args) {
-        getAllPermutationSet("abc").stream().forEach(System.out::println);
+        getPermutation("abc").stream().forEach(System.out::println);
     }
 
-    public static List<String> getAllPermutationSet(String str) {
-        List<String> ret = new ArrayList<>();
-        ret.add(str.substring(0, 1));
-
-        for(int i = 1; i < str.length(); i++) {
-            ret = getStringSets(ret, str.substring(i, i + 1));
-        }
-
-        return ret;
-    }
-
-    public static List<String> getStringSets(List<String> list, String s) {
+    public static List<String> getPermutation(String str) {
         List<String> ret = new ArrayList<>();
 
-        for(int i = 0; i < list.size(); i++) {
-            String str = list.get(i);
-            for(int j = 0; j <= str.length(); j++) {
-                ret.add(getAddCharToString(str, s, j));
-            }
+        if(str.length() == 1) {
+            ret.add(str);
+            return ret;
         }
 
-        return ret;
-    }
-
-    public static String getAddCharToString(String target, String s, int insertPosition) {
-        String ret = "";
-
-        int index = 0;
-        for(int i = 0; i <= target.length(); i++) {
-            if (i == insertPosition) {
-                ret += s;
-            } else {
-                ret += target.substring(index, index + 1);
-                index++;
+        String s = str.substring(0, 1);
+        String remainder = str.substring(1);
+        List<String> list = getPermutation(remainder);
+        for(String target : list) {
+            for(int i = 0; i <= target.length(); i++) {
+                ret.add(getInsertStr(target, s, i));
             }
         }
         return ret;
+    }
+
+    public static String getInsertStr(String target, String s, int insertPosition) {
+        return target.substring(0, insertPosition) + s + target.substring(insertPosition);
     }
 }
