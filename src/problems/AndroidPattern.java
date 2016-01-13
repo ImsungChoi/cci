@@ -7,37 +7,51 @@ import java.util.List;
  * Created by imsungchoi on 2016. 1. 12..
  */
 public class AndroidPattern {
+    static int[][] p = new int[3][3];
+    static int[][] d = {{0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}};
+    static int num = 0;
+
     public static void main(String[] args) {
-        Vertex v1 = new Vertex(1);
-        Vertex v2 = new Vertex(2);
-        Vertex v3 = new Vertex(3);
-        Vertex v4 = new Vertex(4);
-        Vertex v5 = new Vertex(5);
-        Vertex v6 = new Vertex(6);
-        Vertex v7 = new Vertex(7);
-        Vertex v8 = new Vertex(8);
-        Vertex v9 = new Vertex(9);
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                p[i][j] = 0;
+            }
+        }
 
-        v1.addReachable(v2);
-        v1.addReachable(v4);
-        v1.addReachable(v5);
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                calc(i, j, 0);
+            }
+        }
+
+        System.out.println(num);
     }
 
-//    public static int calc(Vertex v) {
-//
-//    }
-}
+    public static void calc(int x, int y, int picked) {
+        for(int i = 0; i < 8; i++) {
+            int mX = x + d[i][0];
+            int mY = y + d[i][1];
+            if (isValid(mX, mY)) {
+                p[mX][mY] = 1;
+                calc(mX, mY, picked + 1);
+                p[mX][mY] = 0;
+            }
+        }
 
-class Vertex {
-    int value;
-    List<Vertex> reachable;
-
-    Vertex(int value) {
-        this.value = value;
-        this.reachable = new ArrayList<>();
+        if (picked >= 4) {
+            num++;
+        }
     }
 
-    void addReachable(Vertex v) {
-        this.reachable.add(v);
+    public static boolean isValid(int x, int y) {
+        if (x < 0 || y < 0 || x > 2 || y > 2) {
+            return false;
+        }
+
+        if (p[x][y] == 1) {
+            return false;
+        }
+
+        return true;
     }
 }
