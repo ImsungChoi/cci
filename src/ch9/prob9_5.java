@@ -8,41 +8,45 @@ import java.util.List;
  */
 public class prob9_5 {
     public static void main(String[] args) {
-        for(String str : getAllPermutationSet("abcd")){
-            System.out.println(str);
-        }
+        getAllPermutationSet("abc").stream().forEach(System.out::println);
     }
 
     public static List<String> getAllPermutationSet(String str) {
         List<String> ret = new ArrayList<>();
-
         ret.add(str.substring(0, 1));
+
         for(int i = 1; i < str.length(); i++) {
-            ret = getAddString(ret, str.charAt(i));
+            ret = getStringSets(ret, str.substring(i, i + 1));
         }
 
         return ret;
     }
 
-    public static List<String> getAddString(List<String> list, char c) {
+    public static List<String> getStringSets(List<String> list, String s) {
         List<String> ret = new ArrayList<>();
-        for(String s : list) {
-            for (int i = 0; i < s.length(); i++) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(getSubString(s, i));
-                sb.append(c);
-                sb.append(s.substring(i));
-                ret.add(sb.toString());
+
+        for(int i = 0; i < list.size(); i++) {
+            String str = list.get(i);
+            for(int j = 0; j <= str.length(); j++) {
+                ret.add(getAddCharToString(str, s, j));
+            }
+        }
+
+        return ret;
+    }
+
+    public static String getAddCharToString(String target, String s, int insertPosition) {
+        String ret = "";
+
+        int index = 0;
+        for(int i = 0; i <= target.length(); i++) {
+            if (i == insertPosition) {
+                ret += s;
+            } else {
+                ret += target.substring(index, index + 1);
+                index++;
             }
         }
         return ret;
-    }
-
-    public static String getSubString(String str, int i) {
-        if (i == 0) {
-            return "";
-        }
-
-        return str.substring(i-1, i);
     }
 }
