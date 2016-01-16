@@ -25,34 +25,25 @@ public class prob9_9 {
 
         int ret = 0;
         for(int i = 0; i < n; i++) {
-            board[current][i] = 1;
             if(isValid(board, n, i, current)) {
+                board[current][i] = 1;
                 ret += calc(board, n, current + 1);
+                board[current][i] = 0;
             }
-            board[current][i] = 0;
         }
         return ret;
     }
 
     public static boolean isValid(int[][] board, int n, int x, int y) {
         boolean ret = true;
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i <= y; i++) {
             if (!ret) {
                 return false;
             }
 
-            if (i != y) {
-                ret &= check(board, n, x, i);
-            }
-
-            if (i != x) {
-                ret &= check(board, n, i, y);
-            }
-
-            if(i != 0) {
-                ret &= check(board, n, x - i, y - i) && check(board, n, x + i, y + i);
-                ret &= check(board, n, x - i, y + i) && check(board, n, x + i, y - i);
-            }
+            ret &= check(board, n, x, i);
+            ret &= check(board, n, x - i, y - i);
+            ret &= check(board, n, x + i, y - i);
         }
         return ret;
     }

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class prob9_6 {
     public static void main(String[] args) {
-        printAllParenthesis(5);
+        printAllParenthesis(4);
     }
 
     public static void printAllParenthesis(int num) {

@@ -7,7 +7,6 @@ import java.util.List;
  * Created by 1002427 on 2016. 1. 13..
  */
 public class Fibonacci {
-    static int num = 2;
     static List<Integer> memo = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println(getFibonacciNumberThanLess(100));
