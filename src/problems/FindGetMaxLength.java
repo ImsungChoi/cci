@@ -22,7 +22,7 @@ public class FindGetMaxLength {
     public static int getMaxLengthOfTwoString(List<String> strings) {
         int max = 0;
         for(int i = 0; i < strings.size(); i++) {
-            for(int j = i; j < strings.size(); j++) {
+            for(int j = i+1; j < strings.size(); j++) {
                 String s1 = strings.get(i);
                 String s2 = strings.get(j);
 

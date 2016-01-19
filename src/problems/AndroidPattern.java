@@ -20,7 +20,9 @@ public class AndroidPattern {
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                calc(i, j, 0);
+                p[i][j] = 1;
+                calc(i, j, 1);
+                p[i][j] = 0;
             }
         }
 
