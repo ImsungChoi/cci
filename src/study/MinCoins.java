@@ -6,7 +6,7 @@ package study;
 public class MinCoins {
     public static void main(String[] args) {
         int[] coins = {25, 10, 5, 1};
-        int sum = 2034;
+        int sum = 20340;
         int[][] memo = new int[coins.length][sum+1];
         for(int i = 0; i < coins.length; i++) {
             for(int j = 0; j < sum+1; j++) {
@@ -18,6 +18,10 @@ public class MinCoins {
     }
 
     public static int getMinCoins(int[][] memo, int[] coins, int sum, int index) {
+        if(sum < 0) {
+            return -1;
+        }
+
         if(sum == 0) {
             return 0;
         }
