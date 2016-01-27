@@ -7,7 +7,6 @@ import java.util.*;
  */
 public class SocialNetwork {
     public static void main(String[] args) {
-
     }
 
     public static List<String> getDirectFriendsForUser(String user) {
@@ -25,17 +24,15 @@ public class SocialNetwork {
             myCourse.put(course, true);
         }
 
-        Queue<String> queue = new LinkedList<>();
+        Set<String> friends = new HashSet<>();
         for(String direct : getDirectFriendsForUser(user)) {
-            queue.offer(direct);
+            friends.add(direct);
             for(String indirect : getDirectFriendsForUser(direct)) {
-                queue.offer(indirect);
+                friends.add(indirect);
             }
         }
 
-        while(!queue.isEmpty()) {
-            String friend = queue.poll();
-
+        for(String friend : friends) {
             for(String course : getAttendedCoursesForUser(friend)) {
                 if(myCourse.containsKey(course)) {
                     continue;
