@@ -7,42 +7,33 @@ public class MinCoins {
     public static void main(String[] args) {
         int[] coins = {25, 10, 5, 1};
         int sum = 20340;
-        int[][] memo = new int[coins.length][sum+1];
-        for(int i = 0; i < coins.length; i++) {
-            for(int j = 0; j < sum+1; j++) {
-                memo[i][j] = -1;
-            }
+        int[] memo = new int[sum+1];
+        for(int i = 0; i < sum+1; i++) {
+            memo[i] = Integer.MAX_VALUE-1;
         }
 
-        System.out.println(getMinCoins(memo, coins, sum, 0));
+        System.out.println(getMinCoins(memo, coins, sum));
     }
 
-    public static int getMinCoins(int[][] memo, int[] coins, int sum, int index) {
+    public static int getMinCoins(int[] memo, int[] coins, int sum) {
         if(sum < 0) {
-            return -1;
+            return Integer.MAX_VALUE-1;
         }
 
         if(sum == 0) {
             return 0;
         }
 
-        if(index >= coins.length) {
-            return -1;
-        }
-
-        if(memo[index][sum] != -1) {
-            return memo[index][sum];
+        if(memo[sum] != Integer.MAX_VALUE-1) {
+            return memo[sum];
         }
 
 
         int min = Integer.MAX_VALUE;
-        for(int i = sum / coins[index]; i >=0; i--) {
-            int r = getMinCoins(memo, coins, sum - (i * coins[index]), index + 1);
-            if(r >= 0) {
-               min = Math.min(min, r + i);
-            }
+        for(int i = 0; i < coins.length; i++) {
+            min = Math.min(min, 1 + getMinCoins(memo, coins, sum-coins[i]));
         }
-        memo[index][sum] = min;
+        memo[sum] = min;
         return min;
     }
 }

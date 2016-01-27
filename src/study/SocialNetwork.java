@@ -10,11 +10,11 @@ public class SocialNetwork {
     }
 
     public static List<String> getDirectFriendsForUser(String user) {
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<String> getAttendedCoursesForUser(String user) {
-        return null;
+        return new ArrayList<>();
     }
 
     public static List<String> getRankedCourses(String user) {
