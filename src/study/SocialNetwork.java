@@ -26,10 +26,11 @@ public class SocialNetwork {
         }
 
         Queue<String> queue = new LinkedList<>();
-        int numOfDirectFriends = 0;
         for(String direct : getDirectFriendsForUser(user)) {
             queue.offer(direct);
-            numOfDirectFriends++;
+            for(String indirect : getDirectFriendsForUser(direct)) {
+                queue.offer(indirect);
+            }
         }
 
         while(!queue.isEmpty()) {
@@ -44,13 +45,6 @@ public class SocialNetwork {
                 } else {
                     courseMap.put(course, 0);
                 }
-            }
-
-            if(numOfDirectFriends > 0) {
-                for(String indirect : getDirectFriendsForUser(friend)) {
-                    queue.offer(indirect);
-                }
-                numOfDirectFriends--;
             }
         }
 
