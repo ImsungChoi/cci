@@ -15,17 +15,17 @@ public class prob18_9 {
             store(i);
         }
 
-        //1, 2,3,4,5,6,7,8,9,10, 11
+        //1,2,3,4,5, 6, 7,8,9,10,11
+        System.out.println(getMedian());
+        store(12);
+        System.out.println(getMedian());
+        store(13);
         System.out.println(getMedian());
     }
 
     public static void store(int val) {
         if(minQueue.isEmpty()) {
             minQueue.offer(val);
-        }
-
-        if(maxQueue.isEmpty()) {
-            maxQueue.offer(val);
         }
 
         int median = getMedian();
@@ -40,10 +40,7 @@ public class prob18_9 {
     }
 
     public static void balance() {
-        if(Math.abs(minQueue.size()-maxQueue.size()) <= 1) {
-            return;
-        }
-        while(Math.abs(minQueue.size() - maxQueue.size()) > 1) {
+        if(Math.abs(minQueue.size()-maxQueue.size()) > 1) {
             if (minQueue.size() > maxQueue.size()) {
                 int temp = minQueue.poll();
                 maxQueue.offer(temp);
@@ -56,6 +53,10 @@ public class prob18_9 {
 
     public static int getMedian() {
         if(minQueue.size() + maxQueue.size() % 2 == 0) {
+            if(minQueue.size() == 0 && maxQueue.size() == 0) {
+                return Integer.MIN_VALUE;
+            }
+
             return (minQueue.peek() + maxQueue.peek()) / 2;
         } else {
             if(minQueue.size() > maxQueue.size()) {

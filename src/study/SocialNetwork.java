@@ -50,7 +50,7 @@ public class SocialNetwork {
 
     public static List<String> sortByValue(final Map<String, Integer> map) {
         List<String> courses = new ArrayList<>(map.keySet());
-        Collections.sort(courses, (s1, s2) -> (map.get(s1) > map.get(s2))? 1 : -1);
+        Collections.sort(courses, (s1, s2) -> (map.get(s1) > map.get(s2))? -1 : 1);
         return courses;
     }
 }
