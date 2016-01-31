@@ -2,6 +2,9 @@ package ch18;
 
 /**
  * Created by imsungchoi on 2016. 1. 28..
+ *
+ *
+ * DP 최적화, O(n^3) 최적화도 있음
  */
 public class prob18_12 {
     public static void main(String[] args) {

@@ -7,7 +7,7 @@ public class prob18_11 {
     public static int[][] start = {{1, 0}, {0, 1}};
     public static int[][] end = {{-1, 0}, {0, -1}};
     public static void main(String[] args) {
-        int n = 20;
+        int n = 8;
         int[][] m = new int[n][n];
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
@@ -20,24 +20,26 @@ public class prob18_11 {
     }
 
     public static int getMaxSubSquare(int[][] m) {
-        int max = 0;
-        for(int i = 0; i < m.length; i++) {
-            for(int j = 0; j < m[0].length; j++) {
-                max = Math.max(max, find(m, j, i));
+        for(int i = m.length; i >= 1; i--) {
+            int ret = find(m, i);
+            if(ret != 0) {
+                return ret;
             }
         }
-        return max;
+        return 0;
     }
 
-    public static int find(int[][] m, int x, int y) {
-        int max = 0;
-        for(int i = y; i < m.length; i++) {
-            for(int j = x;  j < m[0].length; j++) {
-                max = Math.max(max, calcSquare(m, x, y, j, i));
+    public static int find(int[][] m, int size) {
+        for(int i = 0; i <= m.length-size; i++) {
+            for(int j = 0;  j <= m.length-size; j++) {
+                int ret = calcSquare(m, i, j, i+size-1, j+size-1);
+                if(ret != 0) {
+                    return ret;
+                }
             }
         }
 
-        return max;
+        return 0;
     }
 
     public static int calcSquare(int[][] m, int startX, int startY, int endX, int endY) {
@@ -51,6 +53,7 @@ public class prob18_11 {
                 return 0;
             }
         }
+
         return (endX-startX+1) * (endY-startY+1);
     }
 }
