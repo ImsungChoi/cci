@@ -4,9 +4,9 @@ package ch4;
  * Created by 1002427 on 2016. 1. 5..
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
     TreeNode parent;
     Color color;
 
